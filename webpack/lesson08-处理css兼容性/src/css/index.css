@@ -1,0 +1,4 @@
+.box{
+    display: flex;
+    backface-visibility: hidden;
+}
