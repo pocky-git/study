@@ -1,15 +1,10 @@
-
 /* 
-    1.babel-loader配置中添加cacheDirectory
-        不会重新构建没有变化的js文件，可以让第二次构建的速度变得更快
-    2.给文件名添加hash值，由于文件资源缓存导致代码更新后浏览器不会去向服务器请求最新的代码
-      所以需要改变构建后的静态资源文件名来强制浏览器去服务器请求最新的资源
-        hash:        每次构建都会生成一个新的hash，这样的话所有文件名都会改变，都会去服务器重新请求资源
-        chunkhash:   根据chunk生成一个新的hash，如果打包来源于同一个chunk，那么会生成同样的的hash值
-                     而index.js中会引入其他资源，那么这些资源的has值都会改变
-        contenthash: 会根据文件内容生成新的hash值，所以如果文件内容发生改变就会生成新的hash值，而其他
-                     内容没有改变的文件hash值不会变化，就不会重新去服务器请求资源
+    tree shaing:
+    当使用es6模块化语法并且mode为production时 webpack不会讲没有用到的代码进行打包
+    从而减小代码体积 提高代码运行速度
 
+    在package.json中配置sideEffect为false时 有可能把一些副作用的代码删除 例如css
+    可以将sideEffect配置为['*.css','*.less'] 对css以及less这类有副作用的代码不做处理
 */
 
 const { resolve } = require('path')
